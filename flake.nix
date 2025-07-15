@@ -17,7 +17,7 @@
         {
           devShells.default = mkShell {
             buildInputs = [ 
-              node2nix  nodePackages.pnpm wrangler
+              node2nix  nodePackages.pnpm wrangler nodejs_24
             ];
           };
         }
