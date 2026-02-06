@@ -1,38 +1,38 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "mercury-cf",
-  "main": "src/index.ts",
-  "compatibility_date": "2024-04-01"
-  // "compatibility_flags": [
-  //   "nodejs_compat"
-  // ],
-  // "vars": {
-  //   "MY_VAR": "my-variable"
-  // },
-  // "kv_namespaces": [
-  //   {
-  //     "binding": "MY_KV_NAMESPACE",
-  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  //   }
-  // ],
-  // "r2_buckets": [
-  //   {
-  //     "binding": "MY_BUCKET",
-  //     "bucket_name": "my-bucket"
-  //   }
-  // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
-  // "ai": {
-  //   "binding": "AI"
-  // },
-  // "observability": {
-  //   "enabled": true,
-  //   "head_sampling_rate": 1
-  // }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "mercury-cf",
+	"main": "src/index.ts",
+	"compatibility_date": "2024-04-01",
+  "routes": [
+    {"pattern": "jsonsync.edwardsu.me/*","zone_name": "edwardsu.me"}
+  ],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "DOC_STORE",
+				"class_name": "DocStore"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"DocStore"
+			]
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "MERCURY_TENANT_KV",
+			"id": "45c07518008044a5b27d5b8099743fbf"
+		},
+		{
+			"binding": "MERCURY_DATA_KV",
+			"id": "2db7458f3bd249dea476abcabc25027c"
+		}
+	],
+  "vars": {
+    "JWT_TTL": 600,
+  }
 }
